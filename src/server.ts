@@ -17,7 +17,7 @@ const openai = new OpenAI({
 })
 
 async function initializeVectorStore() {
-  const loader = new CSVLoader('./knowledge.csv')
+  const loader = new CSVLoader('./knowledge.csv') //leitura do arquivo de conhecimento
   const docs = await loader.load()
 
   const embeddings = new OpenAIEmbeddings({
@@ -25,7 +25,7 @@ async function initializeVectorStore() {
     openAIApiKey: process.env.OPENAI_KEY,
   })
 
-  return FaissStore.fromDocuments(docs, embeddings)
+  return FaissStore.fromDocuments(docs, embeddings) //criação do vector store(base de dados salvo em memoria)
 }
 
 async function startServer() {
@@ -34,7 +34,7 @@ async function startServer() {
   async function chat(req: Request, res: any) {
     const { message } = req.body
 
-    const busca = await vectorStore.similaritySearch(message, 1)
+    const busca = await vectorStore.similaritySearch(message, 1) //busca na vector store informações que podem ser semelhantes a message, o número indica a quantidade de informações que serão buscadas e usadas para gerar a resposta
 
     const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
