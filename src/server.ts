@@ -25,7 +25,7 @@ async function initializeVectorStore() {
     openAIApiKey: process.env.OPENAI_KEY,
   })
 
-  return FaissStore.fromDocuments(docs, embeddings) //criação do vector store(base de dados salvo em memoria)
+  return FaissStore.fromDocuments(docs, embeddings) //criação do vector store(base de dados salvo em memoria) (caso tenha muitas informações considere usar um banco de dados que suporte vector stores)
 }
 
 async function startServer() {
@@ -43,11 +43,11 @@ async function startServer() {
         {
           role: 'system',
           content:
-            'Você é um assistente virtual vendedor de uma loja e deve responder de forma direta e clara',
+            'Você é um assistente virtual vendedor de uma loja e deve responder de forma direta e clara', //instruções do perfil e como a IA deve se comportar
         },
         {
           role: 'user',
-          content: `${message}, você deve utilizar essas informações a seguir para gerar sua resposta: ${busca[0].pageContent}`,
+          content: `${message}, você deve utilizar essas informações a seguir para gerar sua resposta: ${busca[0].pageContent}`, //mensagem do usuário e o contexto fornecido pela vector store
         },
       ],
     })
