@@ -26,7 +26,7 @@ Para projetos com uma base de dados muito grande, pode ser mais viável usar um 
 ### 1️⃣ Clone o repositório:
 
 ```sh
- git clone https://github.com/seu-usuario/IA-assistent.git
+ git clone https://github.com/seu-usuario/IA-assistant.git
  cd IA-assistent
 ```
 
